@@ -3,7 +3,7 @@ Por favor leiam este documento do começo ao fim, com muita atenção. O intuito
 Instruções de entrega do desafio
 Primeiro, faça um fork deste projeto para sua conta no Github (crie uma se você não possuir).
 Em seguida, implemente o projeto tal qual descrito abaixo, em seu clone local.
-Por fim, envie via email o projeto ou o fork/link do projeto para seu contato Bycoders_ com cópia para rh@bycoders.com.br.
+
 Descrição do projeto
 Você recebeu um arquivo CNAB com os dados das movimentações finanaceira de várias lojas. Precisamos criar uma maneira para que estes dados sejam importados para um banco de dados.
 
