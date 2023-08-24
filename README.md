@@ -23,7 +23,7 @@ Sua tarefa é criar uma interface web que aceite upload do arquivo, normalize os
 1. Ter uma tela (via um formulário) para fazer o upload do arquivo (pontos extras se não usar um popular CSS Framework )
 2. Interpretar o arquivo recebido, normalizar os dados, e salvar corretamente a informação em um banco de dados relacional
 3. Exibir uma lista das vendas realizadas da loja e nesta lista deve conter um totalizador das vendas por mês e por categoria de produto
-4. Ser escrita na sua linguagem de programação de preferência
+4. Ser escrita na sua linguagem de programação de preferência (Pontos extras se utilizar React/Node)
 5. Ela deve utilizar apenas linguagens e bibliotecas livres ou gratuitas.
 6. Readme file descrevendo bem o projeto e seu setup
 7. Utilizar um dos banco de dados a seguir: MySQL, SQL Server Express, PostgreSQL
