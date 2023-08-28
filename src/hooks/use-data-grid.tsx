@@ -22,6 +22,8 @@ export function useDataGrid () {
         field: column,
         headerName: column,
         flex: 1,
+        editable: true,
+        minWidth: 150
       }))
     })()
 

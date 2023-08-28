@@ -16,7 +16,7 @@ export const Home = () => {
           variant="contained"
           component="label"
         >
-          Upload File
+          Enviar planilha
           <input
             type="file"
             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
