@@ -2,6 +2,7 @@ import {
   GridToolbarContainer,
   GridToolbarContainerProps,
   GridToolbarExportContainer,
+  GridToolbarQuickFilter,
 } from '@mui/x-data-grid'
 import { ButtonProps } from '@mui/material'
 import { ExcelExportMenuItem } from './'
@@ -17,8 +18,9 @@ const CustomExportButton = (props: ButtonProps) => {
 
 export const GridToolbar = (props: GridToolbarContainerProps) => {
   return (
-    <GridToolbarContainer {...props}>
+    <GridToolbarContainer {...props} sx={{ justifyContent: 'space-between' }}>
       <CustomExportButton />
+      <GridToolbarQuickFilter />
     </GridToolbarContainer>
   )
 }
