@@ -1,4 +1,4 @@
-import { read, utils } from 'xlsx'
+import { read, utils, writeFile } from 'xlsx'
 
 export function readXlsxFile (file: File): Promise<object[]> {
   return new Promise((resolve, reject) => {
@@ -7,10 +7,10 @@ export function readXlsxFile (file: File): Promise<object[]> {
     reader.onload = (event) => {
       if (event.target?.result) {
         const bstr = event.target.result
-        const workBook = read(bstr, { type: 'binary', cellDates: true })
-        const wsName = workBook.SheetNames[0]
-        const workSheet = workBook.Sheets[wsName]
-        const data = utils.sheet_to_json<object>(workSheet)
+        const workbook = read(bstr, { type: 'binary', cellDates: true })
+        const wsName = workbook.SheetNames[0]
+        const worksheet = workbook.Sheets[wsName]
+        const data = utils.sheet_to_json<object>(worksheet)
         resolve(data)
       } else {
         reject()
@@ -21,4 +21,11 @@ export function readXlsxFile (file: File): Promise<object[]> {
 
     reader.readAsBinaryString(file)
   })
+}
+
+export function exportXlsxFromJson (rows: unknown[]) {
+  const worksheet = utils.json_to_sheet(rows)
+  const workbook = utils.book_new()
+  utils.book_append_sheet(workbook, worksheet)
+  writeFile(workbook, 'Planilha.xlsx', { compression: true })
 }

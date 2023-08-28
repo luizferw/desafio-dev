@@ -7,11 +7,13 @@ interface GridProps {
   rows: readonly GridValidRowModel[]
 }
 
+const gridInitialState = {
+  columns: [],
+  rows: []
+}
+
 export function useDataGrid () {
-  const [grid, setGrid] = useState<GridProps>({
-    columns: [],
-    rows: []
-  })
+  const [grid, setGrid] = useState<GridProps>(gridInitialState)
 
   function parseXlsxFile (file: object[]): GridProps {
     const columns: GridColDef[] = (() => {
@@ -51,8 +53,12 @@ export function useDataGrid () {
     const eventFile = event.target.files?.[0]
     if (eventFile) {
       const file = await readXlsxFile(eventFile)
-      const parsedFile = parseXlsxFile(file)
-      setGrid(parsedFile)
+      if (file.length) {
+        const parsedFile = parseXlsxFile(file)
+        setGrid(parsedFile)
+      } else {
+        setGrid(gridInitialState)
+      }
     }
   }
 
