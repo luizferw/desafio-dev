@@ -1,6 +1,6 @@
 import { read, utils, writeFile } from 'xlsx'
 
-export function readXlsxFile (file: File): Promise<object[]> {
+export function readXlsxFile<T> (file: File): Promise<T[]> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -10,7 +10,7 @@ export function readXlsxFile (file: File): Promise<object[]> {
         const workbook = read(bstr, { type: 'binary', cellDates: true })
         const wsName = workbook.SheetNames[0]
         const worksheet = workbook.Sheets[wsName]
-        const data = utils.sheet_to_json<object>(worksheet)
+        const data = utils.sheet_to_json<T>(worksheet)
         resolve(data)
       } else {
         reject()
@@ -27,5 +27,5 @@ export function exportXlsxFromJson (rows: unknown[]) {
   const worksheet = utils.json_to_sheet(rows)
   const workbook = utils.book_new()
   utils.book_append_sheet(workbook, worksheet)
-  writeFile(workbook, 'Planilha.xlsx', { compression: true })
+  writeFile(workbook, 'Base-Dados-Desafio-DEV-01.xlsx', { compression: true })
 }

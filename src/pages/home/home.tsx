@@ -2,6 +2,8 @@ import { Box, Button, Container, Typography } from '@mui/material'
 import { DataGrid } from './components/data-grid'
 import { useDataGrid } from '@/hooks'
 import { GridToolbar } from './components/grid-toolbar'
+import { GridFooter } from './components/grid-footer'
+import { SaleGrid } from '@/domain/models/sale'
 
 export const Home = () => {
   const { grid, handleOnChangeFile } = useDataGrid()
@@ -29,8 +31,10 @@ export const Home = () => {
         <DataGrid
           rows={grid.rows}
           columns={grid.columns}
+          getRowId={(row: SaleGrid) => row.ID}
           slots={{
-            toolbar: GridToolbar
+            toolbar: GridToolbar,
+            footer: GridFooter
           }}
         />
       </Box>

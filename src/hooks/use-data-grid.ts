@@ -1,10 +1,11 @@
+import { Sale, SaleGrid } from '@/domain/models/sale'
 import { isValidDate, readXlsxFile } from '@/utils'
-import { GridColDef, GridRowsProp, GridValidRowModel } from '@mui/x-data-grid'
+import { GridColDef, GridRowsProp } from '@mui/x-data-grid'
 import { ChangeEvent, useState } from 'react'
 
-interface GridProps {
+interface SalesGridProps {
   columns: GridColDef[]
-  rows: readonly GridValidRowModel[]
+  rows: GridRowsProp<SaleGrid>
 }
 
 const gridInitialState = {
@@ -13,10 +14,10 @@ const gridInitialState = {
 }
 
 export function useDataGrid () {
-  const [grid, setGrid] = useState<GridProps>(gridInitialState)
+  const [grid, setGrid] = useState<SalesGridProps>(gridInitialState)
 
-  function parseXlsxFile (file: object[]): GridProps {
-    const columns: GridColDef[] = (() => {
+  function parseXlsxFile (file: Sale[]): SalesGridProps {
+    const columns = (() => {
       const columns = Object.keys(file[0])
       return columns.map((column) => ({
         field: column,
@@ -27,22 +28,14 @@ export function useDataGrid () {
       }))
     })()
 
-    const rows: GridRowsProp = (() => {
+    const rows = (() => {
       const rows = file
       return rows.map((row, index) => {
-        const updatedRow: Record<string, unknown> = {}
-
-        Object.entries(row).forEach(([key, value]) => {
-          if (isValidDate(value)) {
-            value = value.toLocaleDateString()
-          }
-          updatedRow[key] = value
-        })
-
         return {
-          ...updatedRow,
-          id: index
-        }
+          ...row,
+          DATA: isValidDate(row.DATA) ? row.DATA.toLocaleDateString() : row.DATA,
+          ID: index
+        } as SaleGrid
       })
     })()
 
@@ -54,7 +47,7 @@ export function useDataGrid () {
 
     const eventFile = event.target.files?.[0]
     if (eventFile) {
-      const file = await readXlsxFile(eventFile)
+      const file = await readXlsxFile<Sale>(eventFile)
       if (file.length) {
         const parsedFile = parseXlsxFile(file)
         setGrid(parsedFile)
