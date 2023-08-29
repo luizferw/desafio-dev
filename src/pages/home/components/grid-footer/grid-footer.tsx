@@ -1,19 +1,7 @@
 import { SaleGrid } from '@/domain/models/sale'
 import { Box, Typography } from '@mui/material'
-import { GridApi, GridPagination, gridFilteredSortedRowIdsSelector, gridVisibleColumnFieldsSelector, useGridApiContext } from '@mui/x-data-grid'
-
-const getRows = (apiRef: React.MutableRefObject<GridApi>) => {
-  const filteredSortedRowIds = gridFilteredSortedRowIdsSelector(apiRef)
-  const visibleColumnsField = gridVisibleColumnFieldsSelector(apiRef)
-
-  return filteredSortedRowIds.map((id) => {
-    const row: Record<string, unknown> = {}
-    visibleColumnsField.forEach((field) => {
-      row[field] = apiRef.current.getCellParams(id, field).value
-    })
-    return row
-  })
-}
+import { GridPagination, useGridApiContext } from '@mui/x-data-grid'
+import { getRows } from '../../utils'
 
 export const GridFooter = () => {
   const apiRef = useGridApiContext()

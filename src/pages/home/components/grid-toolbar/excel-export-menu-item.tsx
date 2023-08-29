@@ -1,25 +1,7 @@
-import {
-  GridExportMenuItemProps,
-  useGridApiContext,
-  GridApi,
-  gridFilteredSortedRowIdsSelector,
-  gridVisibleColumnFieldsSelector,
-} from '@mui/x-data-grid'
+import { GridExportMenuItemProps, useGridApiContext } from '@mui/x-data-grid'
 import { MenuItem } from '@mui/material'
 import { exportXlsxFromJson } from '@/utils'
-
-const getRows = (apiRef: React.MutableRefObject<GridApi>) => {
-  const filteredSortedRowIds = gridFilteredSortedRowIdsSelector(apiRef)
-  const visibleColumnsField = gridVisibleColumnFieldsSelector(apiRef)
-
-  return filteredSortedRowIds.map((id) => {
-    const row: Record<string, unknown> = {}
-    visibleColumnsField.forEach((field) => {
-      row[field] = apiRef.current.getCellParams(id, field).value
-    })
-    return row
-  })
-}
+import { getRows } from '../../utils'
 
 export const ExcelExportMenuItem = (props: GridExportMenuItemProps<object>) => {
   const apiRef = useGridApiContext()

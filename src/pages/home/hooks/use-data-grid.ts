@@ -47,18 +47,34 @@ export function useDataGrid () {
 
     const eventFile = event.target.files?.[0]
     if (eventFile) {
-      const file = await readXlsxFile<Sale>(eventFile)
-      if (file.length) {
-        const parsedFile = parseXlsxFile(file)
+      try {
+        const file = await readXlsxFile<Sale>(eventFile)
+        const parsedFile = file.length ? parseXlsxFile(file) : gridInitialState
         setGrid(parsedFile)
-      } else {
+      } catch {
         setGrid(gridInitialState)
       }
     }
   }
 
+  function handleUpdateRow (row: SaleGrid) {
+    setGrid((oldState) => {
+      const updatedRows = oldState.rows.map((oldRow) =>
+        oldRow.ID === row.ID ? row : oldRow
+      )
+
+      return {
+        ...oldState,
+        rows: updatedRows,
+      }
+    })
+
+    return row
+  }
+
   return {
     grid,
-    handleOnChangeFile
+    handleOnChangeFile,
+    handleUpdateRow
   }
 }
