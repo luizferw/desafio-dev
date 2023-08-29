@@ -17,8 +17,9 @@ export const Home = () => {
 
   return (
     <Container sx={{ py: 3 }}>
-      <Box mb={4}>
-        <Typography variant="h2">Desafio Manchester</Typography>
+      <Box mb={3}>
+        <Typography mb={2} variant="h2">Desafio Manchester</Typography>
+        <Typography>Suba o XLSX de vendas e clique duas vezes na célula para editá-la</Typography>
       </Box>
       <Box mb={2}>
         <Button
