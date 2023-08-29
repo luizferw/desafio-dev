@@ -1,3 +1,19 @@
+# Instruções para rodar o projeto localmente
+
+Clonar o repositório
+`git clone https://github.com/luizfer/desafio-dev.git`
+
+Acessar a pasta
+`cd desafio-dev`
+
+Instalar as dependências
+`yarn`
+
+Rodar local
+`yarn dev`
+
+Abrir o navegador em http://localhost:5173/
+
 # Desafio de programação para vaga de desenvolvedor
 
 Por favor leiam este documento do começo ao fim, com muita atenção.
@@ -21,7 +37,7 @@ Sua tarefa é criar uma interface web que aceite o upload do arquivo, normalize 
 **Sua aplicação web DEVE:**
 
 1. Ter uma tela (via um formulário) para fazer o upload do arquivo. Pontos extras se a implementação não utilizar bibliotecas para a função de importação.
-2. Interpretar o arquivo recebido, normalizar os dados, e apresentar em tela os dados recebidos. 
+2. Interpretar o arquivo recebido, normalizar os dados, e apresentar em tela os dados recebidos.
 3. Exibir uma lista das vendas realizadas da loja, e nesta lista deve conter um totalizador das vendas por mês e por categoria de produto.
 4. Permitir a edição dos dados em tela, e o download dos dados após as edições terem sido concluídas, na mesma formatação utilizada pelo arquivo .xlsx de entrada.
 5. Utilizar React, junto com Material UI ou Chakra UI.
